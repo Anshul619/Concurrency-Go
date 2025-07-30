@@ -9,6 +9,14 @@
 | Signal cancellation (e.g. when a client disconnects, or when a timeout is hit).                                                           |
 | Carry request-scoped values (like auth tokens, request IDs) across API calls without polluting function signatures with extra parameters. |
 
+# Real-World Scenarios
+
+| Title                    | Description                                                                                                                                                                                                                                                                                                                |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Context in Microservices | In a microservices architecture, each service often relies on various external dependencies and communicates with other services. <br/>- Context can be used to propagate important information, such as **authentication tokens**, **request metadata**, or **tracing identifiers**, throughout the service interactions. |
+| Context in Test Suites   | When writing test suites, context can be utilized to manage test timeouts, control test-specific configurations, and enable graceful termination of tests.                                                                                                                                                                 |
+| Context in Web Servers   | Web servers handle multiple concurrent requests, and context helps manage the lifecycle of each request.                                                                                                                                                                                                                   |
+
 # Best Practices
 
 | Title                              | Description                                                                                                                                                                                                                    |
@@ -20,14 +28,6 @@
 | Keep Context Size Small            | Avoid storing large or unnecessary data in the context. Only include the data required for the specific operation.                                                                                                             |
 | Avoid Chaining Contexts            | Chaining contexts can lead to confusion and make it challenging to manage the context hierarchy. <br/>- Instead, propagate a single context throughout the application.                                                        |
 | Be Mindful of Goroutine Leaks      | Always ensure that goroutines associated with a context are properly closed or terminated to avoid goroutine leaks.                                                                                                            |
-
-# Context in Real-World Scenarios
-
-| Title                    | Description                                                                                                                                                                                                                                                                                                                |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Context in Microservices | In a microservices architecture, each service often relies on various external dependencies and communicates with other services. <br/>- Context can be used to propagate important information, such as **authentication tokens**, **request metadata**, or **tracing identifiers**, throughout the service interactions. |
-| Context in Test Suites   | When writing test suites, context can be utilized to manage test timeouts, control test-specific configurations, and enable graceful termination of tests.                                                                                                                                                                 |
-| Context in Web Servers   | Web servers handle multiple concurrent requests, and context helps manage the lifecycle of each request.                                                                                                                                                                                                                   |
 
 # References
 - [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
