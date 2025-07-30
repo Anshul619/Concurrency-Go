@@ -29,5 +29,27 @@
 | Avoid Chaining Contexts            | Chaining contexts can lead to confusion and make it challenging to manage the context hierarchy. <br/>- Instead, propagate a single context throughout the application.                                                        |
 | Be Mindful of Goroutine Leaks      | Always ensure that goroutines associated with a context are properly closed or terminated to avoid goroutine leaks.                                                                                                            |
 
+# Constructs
+
+| Title                                                                                    | Quick Note                        | Description                                                            |
+|------------------------------------------------------------------------------------------|-----------------------------------|------------------------------------------------------------------------|
+| ctx, cancel := context.Background()                                                      | New Context                       | Create new context                                                     |
+| ctx, cancel := context.WithCancel(context.Background())                                  | Manual cancellation               | Create child context which would be cancelled using `cancel()` call    |
+| ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)                  | Auto-cancel after duration        | Create child context with "duration based" timeout                     |
+| ctx, cancel := context.WithDeadline(context.Background(), time.Now().Add(2*time.Second)) | Auto-cancel at a specific time    | Create child context with "time based" timeout                         |
+| ctx, cancel := context.WithValue(context.Background(), "UserID", 123)                    | Attaches key/value to the context | Create child context with custom values                                |
+| <-ctx.Done()                                                                             |                                   | Blocking channel until context is done (completed/cancelled/timed-out) |
+
+# Context interface - internal implementation
+
+````
+type Context interface {
+    Deadline() (deadline time.Time, ok bool)
+    Done() <-chan struct{}
+    Err() error
+    Value(key any) any
+}
+````
+
 # References
 - [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
