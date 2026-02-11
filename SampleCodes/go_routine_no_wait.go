@@ -1,15 +1,17 @@
 package main
 
-import "log"
+import (
+	"log/slog"
+)
 
-func main() {
-	log.Println("main routine start")
-	go printNumbers()
-	log.Println("main routine end")
+func goRoutineNoWait() {
+	slog.Info("main routine start")
+	go printNumbers1()
+	slog.Info("main routine end")
 }
 
-func printNumbers() {
+func printNumbers1() {
 	for i := 0; i < 100; i++ {
-		log.Println("go routine %v", i)
+		slog.Info("go routine %v", i)
 	}
 }

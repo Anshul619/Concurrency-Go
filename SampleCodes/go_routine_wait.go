@@ -1,26 +1,25 @@
 package main
 
 import (
-	"log"
+	"log/slog"
 	"sync"
 )
 
-func main() {
-	log.Println("main routine start")
+func goRoutineWait() {
+	slog.Info("main routine start")
 	var wg sync.WaitGroup
 
-	wg.Add(1)
-	go func() {
+	wg.Go(func() {
 		printNumbers()
-		wg.Done()
-	}()
+	})
+
 	wg.Wait()
 
-	log.Println("main routine end")
+	slog.Info("main routine end")
 }
 
 func printNumbers() {
 	for i := 0; i < 100; i++ {
-		log.Println("go routine %v", i)
+		slog.Info("go routine", "index", i)
 	}
 }

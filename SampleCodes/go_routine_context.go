@@ -26,7 +26,7 @@ func callAPI(ctx context.Context, name string, url string) error {
 	return nil
 }
 
-func main() {
+func goRoutineContext() {
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 
@@ -43,16 +43,15 @@ func main() {
 	errCh := make(chan error, len(apis))
 
 	for _, api := range apis {
-		wg.Add(1)
-		go func(apiName, apiURL string) {
-			defer wg.Done()
-			if err := callAPI(ctx, apiName, apiURL); err != nil {
+
+		wg.Go(func() {
+			if err := callAPI(ctx, api.name, api.url); err != nil {
 				fmt.Println("Error:", err)
 				// Cancel other requests on first failure or timeout
 				cancel()
 				errCh <- err
 			}
-		}(api.name, api.url)
+		})
 	}
 
 	// Wait for all goroutines
