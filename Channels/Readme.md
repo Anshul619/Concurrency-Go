@@ -16,11 +16,11 @@ v := <-ch  // Receive from ch, and
 
 # Go Channels constructs 
 
-| Title                                        | Code                                                      |
-|----------------------------------------------|-----------------------------------------------------------|
-| Create Channel                               | Mychannel:= make(chan Type)<br/>- var Mychannel chan Type |
-| Send data to Channel                         | Mychannel <- element // Send data to Mychannel            |
-| Receive data from Mychannel - BLOCKING CALL. | element := <-Mychannel<br/>- log.Println(<-Mychannel)     |
+| Title                                       | Code                                                      |
+|---------------------------------------------|-----------------------------------------------------------|
+| Create Channel                              | Mychannel:= make(chan Type)<br/>- var Mychannel chan Type |
+| Send data to Channel                        | Mychannel <- element // Send data to Mychannel            |
+| Receive data from Mychannel - BLOCKING CALL | element := <-Mychannel<br/>- log.Println(<-Mychannel)     |
 
 # Types
 

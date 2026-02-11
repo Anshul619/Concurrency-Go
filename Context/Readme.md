@@ -21,7 +21,7 @@
 
 | Title                                  | Description                                                                                                                                                                                                                    |
 |----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Pass Context Explicitly        | Always pass the context as an explicit argument to functions or goroutines instead of using global variables. <br/>- This makes it easier to manage the context’s lifecycle and prevents potential data races.                 |
+| Pass Context Explicitly                | Always pass the context as an explicit argument to functions or goroutines instead of using global variables. <br/>- This makes it easier to manage the context’s lifecycle and prevents potential data races.                 |
 | Prefer Cancel Over Timeout             | Use `context.WithCancel()` for cancellation when possible, as it allows you to explicitly trigger cancellation when needed. <br/>- `context.WithTimeout()` is more suitable when you need an automatic cancellation mechanism. |
 | Use `context.TODO()`                   | If you are unsure which context to use in a particular scenario, consider using `context.TODO()`. However, make sure to replace it with the appropriate context later.                                                         |
 | Keep Context Size Small                | Avoid storing large or unnecessary data in the context. Only include the data required for the specific operation.                                                                                                             |
@@ -40,7 +40,7 @@
 | ctx, cancel := context.WithValue(context.Background(), "UserID", 123)                    | Attaches key/value to the context | Create child context with custom values                                |
 | <-ctx.Done()                                                                             |                                   | Blocking channel until context is done (completed/cancelled/timed-out) |
 
-# Context interface - internal implementation
+# Context interface methods
 
 ````
 type Context interface {
